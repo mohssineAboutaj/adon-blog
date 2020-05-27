@@ -1,0 +1,36 @@
+@layout('layouts/default')
+
+@section('content')
+	<h1>create new post</h1>
+	<div class="row">
+		<div class="col">
+			<div class="card mx-auto px-2 py-4 my-2 text-capitalize" style="max-width: 400px">
+				<form action="/create" method="POST">
+					{{ csrfField() }}
+					<div class="form-group">
+						<label for="post-title">post title</label>
+						<input
+							type="text"
+							name="title"
+							id="post-title"
+							class="form-control"
+							placeholder="post title"
+							aria-describedby="titleHelp"
+							autofocus
+						/>
+						<small id="titleHelp" class="text-muted">
+							title Help text
+						</small>
+					</div>
+					<div class="form-group">
+						<label for="post-content">post content</label>
+						<textarea class="form-control" name="content" id="post-content" rows="3"></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-block text-uppercase my-4">create post</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+@endsection

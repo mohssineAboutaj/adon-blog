@@ -1,0 +1,9 @@
+@import '../../node_modules/bootswatch/dist/darkly/variables';
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+h1 {
+	text-align: center;
+	text-transform: capitalize;
+	margin-top: 1rem;
+	margin-bottom: 1.6rem;
+}

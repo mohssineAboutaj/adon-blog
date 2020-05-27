@@ -1,0 +1,25 @@
+@layout('layouts/default')
+
+@section('content')
+	<h1>home</h1>
+	<div class="row">
+		@each(post in posts)
+			<div class="col-sm-12 col-md-6 col-lg-4">
+				<div class="card mt-2 mb-3">
+					<h3 class="card-title text-capitalize mt-2 text-center">
+						{{ post.title }}
+					</h3>
+					<div class="card-body">X
+						{{ post.content }}
+					</div>
+					<div class="card-bottom">
+						<a href="/post/{{ post.id }}" class="btn btn-primary btn-block">
+							<span class="text-uppercase">show more</span>
+							<i class="fa fa-angle-double-right mx-1"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		@endeach
+	</div>
+@endsection
