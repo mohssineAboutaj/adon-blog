@@ -24,5 +24,6 @@ Route.get("/create", "PostController.create");
 Route.post("/create", "PostController.store");
 
 Route.get("/post/:id/edit", "PostController.edit");
+Route.post("/post/:id/update", "PostController.update");
 
 Route.get("/post/:id/delete", "PostController.delete");

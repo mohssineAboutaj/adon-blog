@@ -33,6 +33,8 @@
     "adonis-mix": "^1.2.0",
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.4.1",
+    "dateformat": "^3.0.3",
+    "is-empty": "^1.2.0",
     "jquery": "^3.5.0",
     "mysql": "^2.18.1",
     "popper.js": "^1.16.1"

@@ -7,24 +7,20 @@
 			<div class="col">
 				creted at: <span class="text-primary">{{ post.created_at }}</span>
 			</div>
-			<div class="col">
-				updated at: <span class="text-primary">{{ post.updated_at }}</span>
-			</div>
-			<div class="col">
-				<div class="row text-uppercase">
-					<div class="col">
-						<a href="/post/{{ post.id }}/edit" class="btn btn-sm btn-success">
-							<i class="fas fa-fw fa-edit"></i>
-							edit
-						</a>
-					</div>
-					<div class="col">
-						<a href="/post/{{ post.id }}/delete" class="btn btn-sm btn-danger">
-							<i class="fas fa-fw fa-trash"></i>
-							delete
-						</a>
-					</div>
+			@if(post.updated_at !== post.created_at)
+				<div class="col">
+					last update: <span class="text-primary">{{ post.updated_at }}</span>
 				</div>
+			@endif
+			<div class="col text-right text-uppercase">
+				<a href="/post/{{ post.id }}/edit" class="btn btn-sm btn-success mx-1">
+					<i class="fas fa-fw fa-edit"></i>
+					edit
+				</a>
+				<a href="/post/{{ post.id }}/delete" class="btn btn-sm btn-danger mx-1">
+					<i class="fas fa-fw fa-trash"></i>
+					delete
+				</a>
 			</div>
 		</div>
 		<div class="card my-4">
