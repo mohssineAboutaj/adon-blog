@@ -1,25 +1,42 @@
 @layout('layouts/default')
 
 @section('content')
-	<h1>home</h1>
-	<div class="row">
-		@each(post in posts)
-			<div class="col-sm-12 col-md-6 col-lg-4">
-				<div class="card mt-2 mb-3">
-					<h3 class="card-title text-capitalize mt-2 text-center">
-						{{ post.title }}
-					</h3>
-					<div class="card-body">
-						{{ post.content }}
-					</div>
-					<div class="card-bottom">
-						<a href="/post/{{ post.id }}" class="btn btn-primary btn-block">
-							<span class="text-uppercase">show more</span>
-							<i class="fa fa-angle-double-right mx-1"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-		@endeach
+<h1>home</h1>
+<div class="notif text-capitalize">
+	@if(flashMessage('notif'))
+	<div
+		class="alert alert-success"
+		role="alert"
+	>
+		<i class="fas fa-check-circle text-success fa-fw"></i>
+		<span>{{ flashMessage('notif') }}</span>
 	</div>
+	@endif
+</div>
+<div class="row">
+	@each(post in posts)
+	<div class="col-sm-12 col-md-6 col-lg-4">
+		<div class="card mt-2 mb-3">
+			<h3 class="card-title text-capitalize mt-2 text-center">
+				{{ post.title }}
+			</h3>
+			<div
+				class="card-body mb-2"
+				style="height: 100px;overflow: hidden"
+			>
+				{{ post.content }}
+			</div>
+			<div class="card-bottom">
+				<a
+					href="/post/{{ post.id }}"
+					class="btn btn-primary btn-block"
+				>
+					<span class="text-uppercase">show more</span>
+					<i class="fa fa-angle-double-right mx-1"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	@endeach
+</div>
 @endsection

@@ -1,35 +1,86 @@
 @layout('layouts/default')
 
 @section('content')
-	@if(post.title)
-		<h1>{{ post.title }}</h1>
-		<div class="row">
-			<div class="col">
-				creted at: <span class="text-primary">{{ post.created_at }}</span>
-			</div>
-			@if(post.updated_at !== post.created_at)
-				<div class="col">
-					last update: <span class="text-primary">{{ post.updated_at }}</span>
-				</div>
-			@endif
-			<div class="col text-right text-uppercase">
-				<a href="/post/{{ post.id }}/edit" class="btn btn-sm btn-success mx-1">
-					<i class="fas fa-fw fa-edit"></i>
-					edit
-				</a>
-				<a href="/post/{{ post.id }}/delete" class="btn btn-sm btn-danger mx-1">
-					<i class="fas fa-fw fa-trash"></i>
-					delete
-				</a>
-			</div>
-		</div>
-		<div class="card my-4">
-			<div class="card-body">{{ post.content }}</div>
-		</div>
-	@else
-		<h3 class="text-center text-capitalize my-5">
-			<div class="h1">404</div>
-			<div>post not found</div>
-		</h3>
+@if(post.title)
+<h1>{{ post.title }}</h1>
+<div class="row">
+	<div class="col-xs-12 col-sm my-2">
+		creted at: <span class="text-primary">{{ post.created_at }}</span>
+	</div>
+	@if(post.updated_at !== post.created_at)
+	<div class="col-xs-12 col-sm my-2">
+		last update: <span class="text-primary">{{ post.updated_at }}</span>
+	</div>
 	@endif
+	<div class="col-xs-12 col-sm my-2">
+		<div class="text-right">
+			<a
+				href="/post/{{ post.id }}/edit"
+				class="btn btn-sm btn-success mx-1"
+			>
+				<i class="fas fa-fw fa-edit"></i>
+				edit
+			</a>
+			<a
+				href="#"
+				data-toggle="modal"
+				data-target="#delete-post-{{ post.id }}"
+				class="btn btn-sm btn-danger mx-1"
+			>
+				<i class="fas fa-fw fa-trash"></i>
+				delete
+			</a>
+		</div>
+	</div>
+</div>
+<div class="card my-4">
+	<div class="card-body">{{ post.content }}</div>
+</div>
+<!-- start Modal -->
+<div
+	class="modal fade text-capitalize"
+	id="delete-post-{{ post.id }}"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="{{ post.title.replace(/ /, '-') }}"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5
+					class="modal-title"
+					id="{{ post.title.replace(/ /, '-') }}"
+				>delete post</h5>
+			</div>
+			<div class="modal-body">
+				are you sure you want to delete <u>{{ post.title }}</u>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-sm btn-secondary"
+					data-dismiss="modal"
+				>cancel</button>
+				<form
+					action="/post/{{ post.id }}/delete?_method=DELETE"
+					method="POST"
+				>
+					{{ csrfField() }}
+					<button
+						type="submit"
+						class="btn btn-sm btn-danger"
+					>delete post</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end Modal -->
+@else
+<h3 class="text-center text-capitalize my-5">
+	<div class="h1">404</div>
+	<div>post not found</div>
+</h3>
+@endif
 @endsection
