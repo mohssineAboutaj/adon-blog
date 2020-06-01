@@ -11,6 +11,7 @@
 			<form
 				action="/create"
 				method="POST"
+				enctype="multipart/form-data"
 			>
 				{{ csrfField() }}
 				<div class="form-group">
@@ -40,10 +41,26 @@
 					{{ elIf('<small id="contentHelp" class="text-muted">$self</small>', getErrorFor('content'), hasErrorFor('content')) }}
 				</div>
 				<div class="form-group">
+					<label for="post-image">post image</label>
+					<input
+						type="file"
+						name="image"
+						id="post-image"
+						class="form-control"
+						aria-describedby="imageHelp"
+						required
+						value="{{ old('image') }}"
+					/>
+					{{ elIf('<small id="imageHelp" class="text-muted">$self</small>', getErrorFor('image'), hasErrorFor('image')) }}
+				</div>
+				<div class="form-group">
 					<button
 						type="submit"
 						class="btn btn-primary btn-block text-uppercase my-4"
-					>create post</button>
+					>
+						<i class="fas fa-fw fa-save mx-0"></i>
+						<span class="mr-1">create post</span>
+					</button>
 				</div>
 			</form>
 		</div>

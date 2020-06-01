@@ -1,15 +1,26 @@
 "use strict";
 
+// adonis modules
 const Post = use("App/Models/Post");
-const isEmpty = require("is-empty");
-const dateformat = require("dateformat");
 const { validate } = use("Validator");
+const Helpers = use("Helpers");
+
+// import / require dependencies
+const dateformat = require("dateformat");
+let uniqid = require("uniqid");
 
 // global validation rules
-const rules = {
+const inputsRules = {
 	title: "required|min:3|max:100",
 	content: "required|min:10"
 };
+const imagesRules = {
+	types: ["png", "jpg", "jpeg"],
+	size: "4mb"
+};
+
+// uploads directory path
+const uploadsDir = Helpers.publicPath("uploads/posts");
 
 class PostController {
 	// index
@@ -42,17 +53,41 @@ class PostController {
 	async store({ request, response, session }) {
 		const title = request.input("title");
 		const content = request.input("content");
+		const img = request.file("image", imagesRules);
 
 		// new instance from Post()
 		const post = new Post();
 
 		// create validation
-		const validation = await validate(request.all(), rules);
+		const validation = await validate(request.all(), inputsRules);
+
+		// upload image proccessing
+		const imageNewName = `${dateformat(
+			new Date(),
+			"d-mmmm-yyyy"
+		)}_${uniqid()}.${img.subtype}`;
+		await img.move(uploadsDir, {
+			name: imageNewName
+		});
 
 		// check post fields to save or return errors
-		if (!validation.fails()) {
+		if (validation.fails()) {
+			session.withErrors(validation.messages()).flashAll();
+			response.redirect("back");
+		} else if (!img.moved()) {
+			session
+				.withErrors([
+					{
+						field: "image",
+						message: img.error().message
+					}
+				])
+				.flashAll();
+			response.redirect("back");
+		} else {
 			post.title = title;
 			post.content = content;
+			post.image = imageNewName;
 			// save data
 			post.save();
 			// redirect after saving & show flash message
@@ -60,9 +95,6 @@ class PostController {
 				notif: "post created successfuly"
 			});
 			response.redirect("/");
-		} else {
-			session.withErrors(validation.messages()).flashAll();
-			response.redirect("back");
 		}
 	}
 
@@ -78,29 +110,51 @@ class PostController {
 
 	// apply post editing
 	async update({ request, response, params, session }) {
+		const postID = params.id;
 		const title = request.input("title");
 		const content = request.input("content");
+		const img = request.file("image", imagesRules);
 
 		// new instance from Post()
-		const post = await Post.find(params.id);
+		const post = await Post.find(postID);
 
 		// create validation
-		const validation = await validate(request.all(), rules);
+		const validation = await validate(request.all(), inputsRules);
+
+		// upload image proccessing
+		const imageNewName = `${dateformat(
+			new Date(),
+			"d-mmmm-yyyy"
+		)}_${uniqid()}.${img.subtype}`;
+		await img.move(uploadsDir, {
+			name: imageNewName
+		});
 
 		// check post fields to save or return errors
-		if (!validation.fails()) {
+		if (validation.fails()) {
+			session.withErrors(validation.messages()).flashAll();
+			response.redirect("back");
+		} else if (!img.moved()) {
+			session
+				.withErrors([
+					{
+						field: "image",
+						message: img.error().message
+					}
+				])
+				.flashAll();
+			response.redirect("back");
+		} else {
 			post.title = title;
 			post.content = content;
+			post.image = imageNewName;
 			// save data
 			post.save();
 			// redirect after saving & show flash message
 			session.flash({
 				notif: "post updated successfuly"
 			});
-			response.redirect("/");
-		} else {
-			session.withErrors(validation.messages()).flashAll();
-			response.redirect("back");
+			response.redirect("/post/" + postID);
 		}
 	}
 

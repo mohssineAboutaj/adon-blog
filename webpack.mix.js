@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+let mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,9 +11,13 @@ let mix = require('laravel-mix');
  |
  */
 
+const src = "./public/assets-src/";
+const out = "./public/";
+
+// prettier-ignore
 mix
-	.js('./src/js/script.js', 'public/')
-	.sass('./src/scss/style.scss', 'public/');
+	.js(`${src}js/script.js`, out)
+	.sass(`${src}scss/style.scss`, out);
 
 // Full API
 // mix.js(src, output);

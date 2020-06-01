@@ -23083,10 +23083,10 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./src/js/script.js":
-/*!**************************!*\
-  !*** ./src/js/script.js ***!
-  \**************************/
+/***/ "./public/assets-src/js/script.js":
+/*!****************************************!*\
+  !*** ./public/assets-src/js/script.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23102,10 +23102,10 @@ __webpack_require__(/*! @fortawesome/fontawesome-free/js/all */ "./node_modules/
 
 /***/ }),
 
-/***/ "./src/scss/style.scss":
-/*!*****************************!*\
-  !*** ./src/scss/style.scss ***!
-  \*****************************/
+/***/ "./public/assets-src/scss/style.scss":
+/*!*******************************************!*\
+  !*** ./public/assets-src/scss/style.scss ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -23114,14 +23114,14 @@ __webpack_require__(/*! @fortawesome/fontawesome-free/js/all */ "./node_modules/
 /***/ }),
 
 /***/ 0:
-/*!******************************************************!*\
-  !*** multi ./src/js/script.js ./src/scss/style.scss ***!
-  \******************************************************/
+/*!**********************************************************************************!*\
+  !*** multi ./public/assets-src/js/script.js ./public/assets-src/scss/style.scss ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/mohssine/Desktop/my-projects/adon-blog/src/js/script.js */"./src/js/script.js");
-module.exports = __webpack_require__(/*! /home/mohssine/Desktop/my-projects/adon-blog/src/scss/style.scss */"./src/scss/style.scss");
+__webpack_require__(/*! /home/mohssine/Desktop/my-projects/adon-blog/public/assets-src/js/script.js */"./public/assets-src/js/script.js");
+module.exports = __webpack_require__(/*! /home/mohssine/Desktop/my-projects/adon-blog/public/assets-src/scss/style.scss */"./public/assets-src/scss/style.scss");
 
 
 /***/ })

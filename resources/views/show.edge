@@ -34,6 +34,11 @@
 	</div>
 </div>
 <div class="card my-4">
+	<img
+		src={{ assetsUrl('uploads/posts/' + post.image) }}
+		alt={{ post.title }}
+		class="card-img-top"
+	/>
 	<div class="card-body">{{ post.content }}</div>
 </div>
 <!-- start Modal -->
